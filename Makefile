@@ -6,7 +6,7 @@
 ##
 
 CC	=	g++
-NAME	=	concat
+NAME	=	nanotekspice
 NAME_TEST = unit_tests
 FLAGS	=	-I / -W -Wall -Wextra -Werror -pedantic -g3
 EXT := cpp
