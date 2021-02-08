@@ -5,8 +5,8 @@
 ** IComponent.hpp
 */
 
-#ifndef NANO_ICOMPONENT_HPP
-#define NANO_ICOMPONENT_HPP
+#ifndef NTS_ICOMPONENT_HPP
+#define NTS_ICOMPONENT_HPP
 
 #include <cstddef>
 
@@ -30,4 +30,4 @@ namespace nts
 
 } // namespace nts
 
-#endif //NANO_ICOMPONENT
+#endif // NTS_ICOMPONENT_HPP

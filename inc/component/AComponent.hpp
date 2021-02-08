@@ -5,8 +5,8 @@
 ** AComponent.hpp
 */
 
-#ifndef ACOMPONENT_HPP
-#define ACOMPONENT_HPP
+#ifndef NTS_ACOMPONENT_HPP
+#define NTS_ACOMPONENT_HPP
 
 #include <map>
 #include <string>
@@ -44,4 +44,4 @@ namespace nts
 
 }
 
-#endif // ACOMPONENT_HPP
+#endif // NTS_ACOMPONENT_HPP

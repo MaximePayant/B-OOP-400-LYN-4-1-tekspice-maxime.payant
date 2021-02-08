@@ -5,8 +5,8 @@
 ** Tristate.hpp
 */
 
-#ifndef TRISTATE_HPP
-#define TRISTATE_HPP
+#ifndef NTS_TRISTATE_HPP
+#define NTS_TRISTATE_HPP
 
 namespace nts
 {
@@ -22,4 +22,4 @@ namespace nts
 
 } // namespace nts
 
-#endif // TRISTATE_HPP
+#endif // NTS_TRISTATE_HPP
