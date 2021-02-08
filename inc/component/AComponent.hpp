@@ -23,20 +23,25 @@ namespace nts
         private:
             const std::size_t m_id;
             const std::string m_type;
+            const std::size_t m_inputCount;
+            const std::size_t m_outputCount;
 
             Tristate m_state;
-            std::size_t m_inputCount;
-            std::size_t m_outputCount;
-            std::map<std::size_t, IComponent> m_componentMap;
+            std::map<std::size_t, std::size_t> m_pinMap;
 
         protected:
-            AComponent(const std::size_t& id, const std::string& type);
+            AComponent(
+                const std::size_t& id,
+                const std::string& type,
+                const std::size_t& inputCount,
+                const std::size_t& outputCount);
+            Tristate getStatut() const;
 
         public:
             ~AComponent() = default;
 
+            Tristate compute(std::size_t pin) override;
             using IComponent::simulate;
-            using IComponent::compute;
             using IComponent::setLink;
             using IComponent::dump;
 
