@@ -26,7 +26,7 @@ namespace nts
             Factory() = default;
             ~Factory() = default;
 
-            std::unique_ptr<IComponent> createComponent(const std::string &type);
+            static std::unique_ptr<IComponent> createComponent(const std::string &type);
 
     }; // class Factory
 

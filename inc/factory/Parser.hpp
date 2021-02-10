@@ -19,15 +19,18 @@ namespace nts
     {
 
         private:
-            std::unordered_map<std::size_t, std::unique_ptr<nts::IComponent>> m_componentMap;
-            std::size_t m_chooseId;
-            std::stack<std::size_t> m_freeId;
+            enum ParserState {NONE, CHIPSET, LINK};
 
-            std::size_t recupId();
+            std::unordered_map<std::string, std::unique_ptr<nts::IComponent>> m_componentMap;
+
+            bool checkState(nts::Parser::ParserState& pState, const std::string& buffer) const;
+            bool checkLine(const nts::Parser::ParserState& pState, const std::string& buffer, int line);
+            bool createComponent(const std::string& firstArg, const std::string& secondArg, int line);
+            bool LinkComponent(const std::string& firstArg, const std::string& secondArg, int line);
 
         public:
-            Parser();
-            ~Parser();
+            Parser(const std::string& filename);
+            ~Parser() = default;
 
     };
 

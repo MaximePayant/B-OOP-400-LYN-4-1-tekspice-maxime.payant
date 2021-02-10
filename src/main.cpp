@@ -32,9 +32,7 @@ int main(int ac, char **av)
     if (check_error(ac, av[1]))
         return (84);
 
-    nts::Parser parser;
-
-
+    nts::Parser parser(av[1]);
 
     return (0);
 }
