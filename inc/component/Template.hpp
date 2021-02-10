@@ -8,23 +8,18 @@
 #ifndef NTS_TEMPLATE_HPP
 #define NTS_TEMPLATE_HPP
 
-#include "AComponent.hpp"
+#include "Component.hpp"
 
 namespace nts
 {
 
     class Template :
-        public AComponent
+        public Component
     {
 
         public:
-            Template() : AComponent(1, "template", 1, 1) {};
+            Template() : Component(nts::UNDEFINED) {};
             ~Template() = default;
-
-            Tristate compute(std::size_t pin) override { (void)pin; return (UNDEFINED); };
-            void simulate(std::size_t tick) override { (void)tick; };
-            void setLink(std::size_t pin, nts::IComponent &other, std::size_t otherPin) override { (void)pin; (void)other; (void)otherPin; };
-            void dump() const override {};
 
     }; // class Template
 

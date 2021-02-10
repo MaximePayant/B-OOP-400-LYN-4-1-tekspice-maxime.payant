@@ -8,7 +8,7 @@
 CC	=	g++
 NAME	=	nanotekspice
 NAME_TEST = unit_tests
-FLAGS	=	-I / -W -Wall -Wextra -Werror -pedantic -g3
+FLAGS	=	-I / -W -Wall -Wextra -Werror -pedantic -g3 -std=c++17
 EXT := cpp
 
 SRC_FOLDER :=  	src/ \

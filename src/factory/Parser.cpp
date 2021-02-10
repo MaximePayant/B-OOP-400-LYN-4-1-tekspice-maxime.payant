@@ -11,6 +11,7 @@
 #include <algorithm>
 
 #include "console/speach.hpp"
+#include "component/Component.hpp"
 #include "factory/Parser.hpp"
 #include "factory/Factory.hpp"
 
@@ -49,7 +50,10 @@ bool nts::Parser::createComponent(const std::string& firstArg, const std::string
 
 bool nts::Parser::LinkComponent(const std::string& firstArg, const std::string& secondArg, int line)
 {
-
+    (void)firstArg;
+    (void)secondArg;
+    (void)line;
+    return (true);
 }
 
 bool nts::Parser::checkState(nts::Parser::ParserState& pState,
@@ -89,7 +93,7 @@ bool nts::Parser::checkLine(const nts::Parser::ParserState& pState,
     return (false);
 }
 
-nts::Parser::Parser(const std::string& filename)
+void nts::Parser::load(const std::string& filename)
 {
     std::ifstream file(filename);
     std::string buffer;
@@ -109,4 +113,11 @@ nts::Parser::Parser(const std::string& filename)
     if (m_componentMap.empty())
         speach::error("ERROR: There is no component in your circuit !");
     std::cout << "List of component size : " << m_componentMap.size() << std::endl;
+}
+
+nts::Tristate nts::Parser::getComponentStatus(const std::string& name)
+{
+    if (m_componentMap.find(name) == m_componentMap.end())
+        throw std::exception();
+    return (nts::UNDEFINED);
 }
