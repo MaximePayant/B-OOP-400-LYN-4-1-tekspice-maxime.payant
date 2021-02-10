@@ -13,6 +13,7 @@ EXT := cpp
 
 SRC_FOLDER :=  	src/ \
 			   	src/component/ \
+			   	src/factory/ \
 			   	src/system/ \
 
 IGNORE_SRC :=	.
