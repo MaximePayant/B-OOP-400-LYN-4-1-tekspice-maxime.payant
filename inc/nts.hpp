@@ -40,21 +40,15 @@ namespace nts
         private:
             static std::unordered_map<std::string, std::unique_ptr<nts::IComponent> (*)()> m_createFunc;
 
-            std::size_t chooseId;
-            std::stack<std::size_t> freeId;
-            std::unordered_map<std::size_t, std::unique_ptr<IComponent>> m_componentMap;
-
         public:
-            System();
+            System() = default;
             ~System() = default;
 
             std::unique_ptr<IComponent> createComponent(const std::string &type);
-            void print() { std::cout << m_componentMap.size() << std::endl; };
-
 
     }; // class System
 
-    static System system;
+    std::size_t recupId();
 
 } // namespace nts
 

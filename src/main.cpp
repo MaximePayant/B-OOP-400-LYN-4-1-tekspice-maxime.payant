@@ -9,6 +9,6 @@
 
 int main(void)
 {
-    nts::system.createComponent("template");
-    nts::system.print();
+    nts::System system;
+    system.createComponent("template");
 }
