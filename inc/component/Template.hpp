@@ -21,8 +21,8 @@ namespace nts
             Template() : AComponent(1, "template", 1, 1) {};
             ~Template() = default;
 
-            void simulate(std::size_t tick) override { (void)tick; };
             Tristate compute(std::size_t pin) override { (void)pin; return (UNDEFINED); };
+            void simulate(std::size_t tick) override { (void)tick; };
             void setLink(std::size_t pin, nts::IComponent &other, std::size_t otherPin) override { (void)pin; (void)other; (void)otherPin; };
             void dump() const override {};
 
