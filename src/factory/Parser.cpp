@@ -48,11 +48,20 @@ bool nts::Parser::createComponent(const std::string& firstArg, const std::string
     return (true);
 }
 
-bool nts::Parser::LinkComponent(const std::string& firstArg, const std::string& secondArg, int line)
+bool nts::Parser::linkComponent(const std::string& firstArg, const std::string& secondArg, int line)
 {
-    (void)firstArg;
-    (void)secondArg;
-    (void)line;
+    if (std::count(firstArg.begin(), firstArg.end(), ':') != 1
+    && std::count(secondArg.begin(), secondArg.end(), ':') != 1) {
+        speach::error("ERROR: Wrong format at line " + std::to_string(line) + " <" + firstArg + " " + secondArg + ">");
+        return (false);
+    }
+
+    std::string firstArgName = firstArg.substr(0, firstArg.find_first_of(':'));
+    std::size_t firstArgPin = std::stoul(firstArg.substr(firstArg.find_first_of(':') + 1));
+    std::string secondArgName = secondArg.substr(0, secondArg.find_first_of(':'));
+    std::size_t secondArgPin = std::stoul(secondArg.substr(secondArg.find_first_of(':') + 1));
+
+    m_componentMap[firstArgName].get()->setLink(firstArgPin, *m_componentMap[secondArgName], secondArgPin);
     return (true);
 }
 
@@ -86,7 +95,7 @@ bool nts::Parser::checkLine(const nts::Parser::ParserState& pState,
         case CHIPSET:
             return (createComponent(firstArg, secondArg, line));
         case LINK:
-            return (LinkComponent(firstArg, secondArg, line));
+            return (linkComponent(firstArg, secondArg, line));
         case NONE:
             return (true);
     }
@@ -113,11 +122,4 @@ void nts::Parser::load(const std::string& filename)
     if (m_componentMap.empty())
         speach::error("ERROR: There is no component in your circuit !");
     std::cout << "List of component size : " << m_componentMap.size() << std::endl;
-}
-
-nts::Tristate nts::Parser::getComponentStatus(const std::string& name)
-{
-    if (m_componentMap.find(name) == m_componentMap.end())
-        throw std::exception();
-    return (nts::UNDEFINED);
 }
