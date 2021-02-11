@@ -8,6 +8,8 @@
 #ifndef NTS_TRISTATE_HPP
 #define NTS_TRISTATE_HPP
 
+#include <string>
+
 namespace nts
 {
 
@@ -18,8 +20,18 @@ namespace nts
         TRUE = true,
         FALSE = false
 
+
     }; // enum Tristate
 
 } // namespace nts
+
+inline std::string to_string(nts::Tristate value)
+{
+    if (value == nts::TRUE)
+        return ("1");
+    else if (value == nts::FALSE)
+        return ("0");
+    return ("U");
+}
 
 #endif // NTS_TRISTATE_HPP

@@ -18,7 +18,7 @@ namespace nts
     {
 
         public:
-            Template() : Component(nts::UNDEFINED) {};
+            Template(const std::string& name) : Component(name, "template", nts::UNDEFINED) {};
             ~Template() = default;
 
     }; // class Template

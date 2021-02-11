@@ -44,7 +44,7 @@ bool nts::Parser::createComponent(const std::string& firstArg, const std::string
         speach::error("ERROR: There is already a component name <" + secondArg + ">. Check at line " + std::to_string(line));
         return (false);
     }
-    m_componentMap[secondArg] = nts::Factory::createComponent(firstArg);
+    m_componentMap[secondArg] = nts::Factory::createComponent(firstArg, secondArg);
     return (true);
 }
 

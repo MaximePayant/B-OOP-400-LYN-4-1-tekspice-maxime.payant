@@ -22,26 +22,23 @@ namespace nts
     {
 
         private:
-            // const std::string m_name;
-            // const std::string m_type;
+            const std::string m_name;
+            const std::string m_type;
 
             Tristate m_state;
             std::map<std::size_t, std::optional<std::reference_wrapper<IComponent>>> m_inputPinMap;
             std::map<std::size_t, std::optional<std::reference_wrapper<IComponent>>> m_outputPinMap;
 
-            Tristate getStatut() const;
-
         protected:
-            Component(Tristate state);
+            Component(const std::string& name, const std::string& type, Tristate state);
 
         public:
             ~Component() = default;
 
             Tristate compute(std::size_t pin) override;
             void setLink(std::size_t pin, IComponent &other, std::size_t otherPin) override;
-
-            void simulate(std::size_t tick) {(void)tick;};
-            void dump() const {};
+            void simulate(std::size_t tick);
+            void dump() const;
 
     };
 

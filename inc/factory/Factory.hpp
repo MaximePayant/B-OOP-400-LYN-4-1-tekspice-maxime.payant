@@ -20,13 +20,13 @@ namespace nts
     {
 
         private:
-            static std::unordered_map<std::string, std::unique_ptr<nts::IComponent> (*)()> m_createFunc;
+            static std::unordered_map<std::string, std::unique_ptr<nts::IComponent> (*)(const std::string&)> m_createFunc;
 
         public:
             Factory() = default;
             ~Factory() = default;
 
-            static std::unique_ptr<IComponent> createComponent(const std::string &type);
+            static std::unique_ptr<IComponent> createComponent(const std::string& type, const std::string& name);
 
     }; // class Factory
 

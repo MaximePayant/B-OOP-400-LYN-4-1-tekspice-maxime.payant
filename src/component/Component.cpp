@@ -5,17 +5,15 @@
 ** AComponent.cpp
 */
 
+#include "console/speach.hpp"
 #include "factory/Parser.hpp"
 #include "component/Component.hpp"
 
-nts::Component::Component(nts::Tristate state) :
+nts::Component::Component(const std::string& name, const std::string& type, nts::Tristate state) :
+    m_name(name),
+    m_type(type),
     m_state(state)
 {}
-
-nts::Tristate nts::Component::getStatut() const
-{
-    return (m_state);
-}
 
 nts::Tristate nts::Component::compute(std::size_t pin)
 {
@@ -27,7 +25,7 @@ nts::Tristate nts::Component::compute(std::size_t pin)
         throw std::exception();
     if (!it->second.has_value())
         throw std::exception();
-    return (reinterpret_cast<nts::Component&>(it->second.value()).getStatut());
+    return (reinterpret_cast<nts::Component&>(it->second.value()).m_state);
 }
 
 void nts::Component::setLink(std::size_t pin, nts::IComponent &other, std::size_t otherPin)
@@ -56,4 +54,21 @@ void nts::Component::setLink(std::size_t pin, nts::IComponent &other, std::size_
     }
     else
         throw std::exception();
+}
+
+void nts::Component::dump() const
+{
+    speach::disp(m_type + " - " + m_name);
+    speach::disp("input(s):");
+    for (auto &[_, cpt] : m_inputPinMap)
+        speach::disp(reinterpret_cast<nts::Component&>(cpt->get()).m_name + ": " + to_string(m_state));
+    speach::disp("output(s):");
+    for (auto &[_, cpt] : m_outputPinMap)
+        speach::disp(reinterpret_cast<nts::Component&>(cpt->get()).m_name + ": " + to_string(m_state));
+    speach::disp("");
+}
+
+void nts::Component::simulate(std::size_t tick)
+{
+    (void)tick;
 }
