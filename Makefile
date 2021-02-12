@@ -11,15 +11,19 @@ NAME_TEST = unit_tests
 FLAGS	=	-I / -W -Wall -Wextra -Werror -pedantic -g3
 EXT := cpp
 
-SRC_FOLDER	:= ex00
-IGNORE_SRC := .
+SRC_FOLDER :=  	src/ \
+			   	src/component/ \
+			   	src/factory/ \
+			   	src/system/ \
+
+IGNORE_SRC :=	.
 SRC :=	$(filter-out $(IGNORE_SRC), $(sort $(shell find $(SRC_FOLDER) -ignore_readdir_race -maxdepth 1 -name '*.$(EXT)')))
 
 TEST_FOLDER	:= tests
 IGNORE_TEST := .
 TEST :=	$(filter-out $(IGNORE_TEST), $(sort $(shell find $(TEST_FOLDER) -ignore_readdir_race -maxdepth 1 -name '*.$(EXT)')))
 
-INC_FOLDER =	ex00
+INC_FOLDER =	inc/
 IGNORE_INC := 	.
 INC := $(filter-out $(IGNORE_INC), $(addprefix -I, $(INC_FOLDER)))
 
@@ -82,8 +86,8 @@ $(OBJDIR):
 	echo -e creating a folder.
 
 clean:
-	$(RM) -r $(OBJDIR)
-	$(RM) errors
+	$(RM) -rf $(OBJ_PATH)
+	$(RM) -f errors
 
 fclean:	clean
 	@rm -f $(NAME)
