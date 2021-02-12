@@ -21,7 +21,7 @@ namespace nts
         public IComponent
     {
 
-        private:
+        protected:
             const std::string m_name;
             const std::string m_type;
 
@@ -29,7 +29,6 @@ namespace nts
             std::map<std::size_t, std::optional<std::reference_wrapper<IComponent>>> m_inputPinMap;
             std::map<std::size_t, std::optional<std::reference_wrapper<IComponent>>> m_outputPinMap;
 
-        protected:
             Component(const std::string& name, const std::string& type, Tristate state);
 
         public:

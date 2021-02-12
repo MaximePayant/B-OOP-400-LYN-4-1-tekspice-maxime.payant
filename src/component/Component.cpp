@@ -25,12 +25,12 @@ nts::Tristate nts::Component::compute(std::size_t pin)
         throw std::exception();
     if (!it->second.has_value())
         throw std::exception();
-    return (reinterpret_cast<nts::Component&>(it->second.value()).m_state);
+    return (dynamic_cast<nts::Component&>(it->second.value().get()).m_state);
 }
 
 void nts::Component::setLink(std::size_t pin, nts::IComponent &other, std::size_t otherPin)
 {
-    nts::Component& otherCpt = reinterpret_cast<nts::Component&>(other);
+    nts::Component& otherCpt = dynamic_cast<nts::Component&>(other);
 
     if (m_inputPinMap.count(pin)) {
         if (otherCpt.m_inputPinMap.count(otherPin))
@@ -61,10 +61,10 @@ void nts::Component::dump() const
     speach::disp(m_type + " - " + m_name);
     speach::disp("input(s):");
     for (auto &[_, cpt] : m_inputPinMap)
-        speach::disp(reinterpret_cast<nts::Component&>(cpt->get()).m_name + ": " + to_string(m_state));
+        speach::disp(dynamic_cast<nts::Component&>(cpt->get()).m_name + ": " + to_string(m_state));
     speach::disp("output(s):");
     for (auto &[_, cpt] : m_outputPinMap)
-        speach::disp(reinterpret_cast<nts::Component&>(cpt->get()).m_name + ": " + to_string(m_state));
+        speach::disp(dynamic_cast<nts::Component&>(cpt->get()).m_name + ": " + to_string(m_state));
     speach::disp("");
 }
 
