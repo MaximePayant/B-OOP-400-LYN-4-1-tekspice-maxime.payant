@@ -5,7 +5,7 @@
 ** AComponent.cpp
 */
 
-#include "component/AComponent.hpp"
+#include "../../inc/component/AComponent.hpp"
 
 nts::AComponent::AComponent(const std::size_t& id,
                             const std::string& type,

@@ -5,7 +5,8 @@
 ** Circuit.cpp
 */
 
-#include "component/special/Circuit.hpp"
+#include "../../../inc/component/special/Circuit.hpp"
+#include "../../../inc/component/IComponent.hpp"
 
 void nts::Circuit::dump() const
 {}

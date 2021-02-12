@@ -8,7 +8,7 @@
 #ifndef NTS_CIRCUIT_HPP
 #define NTS_CIRCUIT_HPP
 
-#include "AComponent.hpp"
+#include "../AComponent.hpp"
 
 namespace nts
 {

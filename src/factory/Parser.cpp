@@ -7,12 +7,10 @@
 
 #include <fstream>
 #include <iostream>
-#include <sstream>
 #include <algorithm>
 
-#include "console/speach.hpp"
-#include "factory/Parser.hpp"
-#include "factory/Factory.hpp"
+#include "../../inc/console/speach.hpp"
+#include "../../inc/factory/Parser.hpp"
 
 static void format(std::string& str)
 {
@@ -49,7 +47,10 @@ bool nts::Parser::createComponent(const std::string& firstArg, const std::string
 
 bool nts::Parser::LinkComponent(const std::string& firstArg, const std::string& secondArg, int line)
 {
-
+    (void) firstArg;
+    (void) secondArg;
+    (void) line;
+    return (true);
 }
 
 bool nts::Parser::checkState(nts::Parser::ParserState& pState,
