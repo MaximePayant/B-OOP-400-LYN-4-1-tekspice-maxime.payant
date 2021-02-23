@@ -8,13 +8,14 @@
 CC	=	g++
 NAME	=	nanotekspice
 NAME_TEST = unit_tests
-FLAGS	=	-I / -W -Wall -Wextra -Werror -pedantic -g3 -std=c++17
+FLAGS	=	-I / -W -Wall -Wextra -Werror -pedantic -g3 -std=c++20
 EXT := cpp
 
 SRC_FOLDER :=  	src/ \
 			   	src/component/ \
 			   	src/factory/ \
 			   	src/system/ \
+			   	src/core
 
 IGNORE_SRC :=	.
 SRC :=	$(filter-out $(IGNORE_SRC), $(sort $(shell find $(SRC_FOLDER) -ignore_readdir_race -maxdepth 1 -name '*.$(EXT)')))

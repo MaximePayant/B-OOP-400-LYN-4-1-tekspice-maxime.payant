@@ -8,13 +8,13 @@
 #ifndef NTS_CIRCUIT_HPP
 #define NTS_CIRCUIT_HPP
 
-#include "AComponent.hpp"
+#include "../IComponent.hpp"
 
 namespace nts
 {
 
     class Circuit :
-        public AComponent
+        public IComponent
     {
 
         public:

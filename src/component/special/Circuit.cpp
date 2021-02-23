@@ -6,6 +6,7 @@
 */
 
 #include "component/special/Circuit.hpp"
+#include "component/IComponent.hpp"
 
 void nts::Circuit::dump() const
 {}

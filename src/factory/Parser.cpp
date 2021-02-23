@@ -7,7 +7,6 @@
 
 #include <fstream>
 #include <iostream>
-#include <sstream>
 #include <algorithm>
 
 #include "console/speach.hpp"

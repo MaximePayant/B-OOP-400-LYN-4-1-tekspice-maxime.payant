@@ -5,10 +5,10 @@
 ** Factory.cpp
 */
 
-#include "console/speach.hpp"
+#include "../../inc/console/speach.hpp"
 
-#include "factory/Factory.hpp"
-#include "component/component.hpp"
+#include "../../inc/factory/Factory.hpp"
+#include "../../inc/component/component.hpp"
 
 template <class T>
 static std::unique_ptr<nts::IComponent> createComponentBis(const std::string& name)
