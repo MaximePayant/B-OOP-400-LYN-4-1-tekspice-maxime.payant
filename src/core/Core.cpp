@@ -7,7 +7,7 @@
 
 #include <iostream>
 #include <csignal>
-#include "Core.hpp"
+#include "../../inc/core/Core.hpp"
 
 bool Core::isLoop = true;
 

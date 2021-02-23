@@ -11,7 +11,7 @@
 #include <map>
 #include <string>
 #include <optional>
-
+#include <functional>
 #include "IComponent.hpp"
 
 namespace nts

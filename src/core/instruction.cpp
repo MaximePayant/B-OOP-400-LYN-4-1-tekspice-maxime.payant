@@ -8,11 +8,14 @@
 #include <iostream>
 #include <unistd.h>
 #include <csignal>
-#include "Core.hpp"
+#include "../../inc/core/Core.hpp"
+#include "../../inc/factory/Parser.hpp"
 
 void Core::display()
 {
-    std::cout << "Display content" << std::endl;
+    for (auto &component : nts::parser.m_componentMap) {
+
+    }
 }
 
 void Core::setInput(std::string var, std::string value)

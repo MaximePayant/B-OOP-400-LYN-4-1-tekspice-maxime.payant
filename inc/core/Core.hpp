@@ -20,7 +20,7 @@ public:
 
     Core();
     ~Core() = default;
-    bool isInCore() const;
+    [[nodiscard]] bool isInCore() const;
     void getValue();
     void display();
     void setInput(std::string var, std::string value);
