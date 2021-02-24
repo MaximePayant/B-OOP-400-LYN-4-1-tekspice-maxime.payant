@@ -1,14 +1,14 @@
 /*
 ** EPITECH PROJECT, 2021
-** Tek2
+** main.cpp.c
 ** File description:
 ** main.cpp
 */
 
 #include <fstream>
-
-#include "console/speach.hpp"
-#include "nts.hpp"
+#include "../inc/console/speach.hpp"
+#include "../inc/nts.hpp"
+#include "../inc/core/Core.hpp"
 
 bool check_error(int ac, char *str)
 {
@@ -29,10 +29,12 @@ bool check_error(int ac, char *str)
 
 int main(int ac, char **av)
 {
+    Core core;
+
     if (check_error(ac, av[1]))
         return (84);
-
     nts::parser.load(av[1]);
-
+    while (core.isInCore())
+        core.getValue();
     return (0);
 }

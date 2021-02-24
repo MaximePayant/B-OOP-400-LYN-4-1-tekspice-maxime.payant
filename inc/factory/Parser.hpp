@@ -8,11 +8,12 @@
 #ifndef NTS_PARSER_HPP
 #define NTS_PARSER_HPP
 
-#include <unordered_map>
+#include <map>
 #include <memory>
 #include <string>
 
-#include "component/IComponent.hpp"
+#include "../component/IComponent.hpp"
+#include "../../inc/core/Core.hpp"
 
 namespace nts
 {
@@ -23,7 +24,7 @@ namespace nts
         private:
             enum ParserState {CHIPSET, LINK, NONE};
 
-            std::unordered_map<std::string, std::unique_ptr<nts::IComponent>> m_componentMap;
+            std::map<std::string, std::unique_ptr<nts::IComponent>> m_componentMap;
 
             bool checkState(ParserState& pState, const std::string& buffer) const;
             bool checkLine(const ParserState& pState, const std::string& buffer, int line);
@@ -35,7 +36,7 @@ namespace nts
             ~Parser() = default;
 
             void load(const std::string& filename);
-
+        friend Core;
     };
 
     static Parser parser;

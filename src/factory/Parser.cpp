@@ -7,13 +7,12 @@
 
 #include <fstream>
 #include <iostream>
-#include <sstream>
 #include <algorithm>
 
-#include "console/speach.hpp"
-#include "component/Component.hpp"
-#include "factory/Parser.hpp"
-#include "factory/Factory.hpp"
+#include "../../inc/console/speach.hpp"
+#include "../../inc/factory/Parser.hpp"
+#include "../../inc/component/Component.hpp"
+#include "../../inc/factory/Factory.hpp"
 
 static void format(std::string& str)
 {

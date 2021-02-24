@@ -13,8 +13,8 @@ EXT := cpp
 
 SRC_FOLDER :=  	src/ \
 			   	src/component/ \
-			   	src/factory/ \
-			   	src/system/ \
+			   	src/factory/ 	\
+			   	src/core
 
 IGNORE_SRC :=	.
 SRC :=	$(filter-out $(IGNORE_SRC), $(sort $(shell find $(SRC_FOLDER) -ignore_readdir_race -maxdepth 1 -name '*.$(EXT)')))

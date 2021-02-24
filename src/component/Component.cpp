@@ -5,9 +5,9 @@
 ** AComponent.cpp
 */
 
-#include "console/speach.hpp"
-#include "factory/Parser.hpp"
-#include "component/Component.hpp"
+#include "../../inc/console/speach.hpp"
+#include "../../inc/factory/Parser.hpp"
+#include "../../inc/component/Component.hpp"
 
 nts::Component::Component(const std::string& name, const std::string& type, nts::Tristate state) :
     m_name(name),
