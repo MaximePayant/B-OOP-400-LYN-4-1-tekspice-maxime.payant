@@ -49,5 +49,5 @@ void nts::Parser::load(const std::string& filename)
             checkLine(pState, buffer, line);
     }
     if (m_componentMap.empty())
-        speach::error("ERROR: There is no component in your circuit !");
+        throw nts::Error("ERROR: There is no component in your circuit !");
 }

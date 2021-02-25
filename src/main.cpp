@@ -38,6 +38,7 @@ int main(int ac, char **av)
         nts::parser.load(av[1]);
     } catch (const nts::Error &e) {
         speach::error(e.what());
+        return (84);
     }
     while (nts::Core::inCore) {
         try {
