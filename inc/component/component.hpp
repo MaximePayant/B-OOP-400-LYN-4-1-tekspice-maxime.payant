@@ -13,5 +13,6 @@
 #include "special/Input.hpp"
 #include "special/Output.hpp"
 #include "special/True.hpp"
+#include "special/Clock.hpp"
 
 #endif // NTS_COMPONENT_HPP

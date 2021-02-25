@@ -21,7 +21,8 @@ std::unordered_map<std::string, std::unique_ptr<nts::IComponent> (*)(const std::
     {"false", createComponentBis<nts::False>},
     {"true", createComponentBis<nts::True>},
     {"output", createComponentBis<nts::Output>},
-    {"input", createComponentBis<nts::Input>}
+    {"input", createComponentBis<nts::Input>},
+    {"clock", createComponentBis<nts::Clock>}
 };
 
 std::unique_ptr<nts::IComponent> nts::Factory::createComponent(const std::string &type, const std::string& name, nts::Tristate state)
