@@ -40,13 +40,17 @@ void nts::Core::display()
 void nts::Core::setInput(std::string var, std::string value)
 {
     auto it = nts::parser.find(var);
-    nts::Tristate state = (value == "1" ? nts::TRUE : (value == "0" ? nts::FALSE : nts::UNDEFINED));
+    nts::Tristate state;
 
+    if (value == "0" || value == "1" || value == "U")
+        state = (value == "1" ? nts::TRUE : (value == "0" ? nts::FALSE : nts::UNDEFINED));
+    else
+        throw nts::Error("ERROR: Wrong value!");
     if (it == nts::parser.end())
-        throw nts::Error("Variable not found!"); //psa de var
+        throw nts::Error("ERROR: Component not found!");
     else if (it->second.get()->getType() != "input"
     && it->second.get()->getType() != "clock")
-        throw nts::Error("Variable : " + var + " is not an input!");
+        throw nts::Error("ERROR: Component <" + var + "> is not an input!");
     dynamic_cast<nts::Component*>(it->second.get())->m_pinMap[1].m_state = state;
 }
 

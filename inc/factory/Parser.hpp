@@ -27,7 +27,7 @@ namespace nts
             std::map<std::string, std::unique_ptr<nts::IComponent>> m_componentMap;
 
             bool checkState(ParserState& pState, const std::string& buffer) const;
-            bool checkLine(const ParserState& pState, const std::string& buffer, int line);
+            void checkLine(const ParserState& pState, const std::string& buffer, int line);
             void createComponent(const std::string& firstArg, const std::string& secondArg, int line);
             void linkComponent(const std::string& firstArg, const std::string& secondArg, int line);
 
