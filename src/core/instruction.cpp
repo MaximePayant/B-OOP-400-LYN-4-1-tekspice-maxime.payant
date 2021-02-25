@@ -8,6 +8,7 @@
 #include <iostream>
 #include <unistd.h>
 #include <csignal>
+#include <error/Error.hpp>
 #include "../../inc/core/Core.hpp"
 #include "../../inc/factory/Parser.hpp"
 #include "../../inc/component/Component.hpp"
@@ -42,10 +43,10 @@ void nts::Core::setInput(std::string var, std::string value)
     nts::Tristate state = (value == "1" ? nts::TRUE : (value == "0" ? nts::FALSE : nts::UNDEFINED));
 
     if (it == nts::parser.end())
-        throw std::exception();
+        throw nts::Error("Variable not found!"); //psa de var
     else if (it->second.get()->getType() != "input"
     && it->second.get()->getType() != "clock")
-        throw std::exception();
+        throw nts::Error("Variable : " + var + " is not an input!");
     dynamic_cast<nts::Component*>(it->second.get())->m_pinMap[1].m_state = state;
 }
 

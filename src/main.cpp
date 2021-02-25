@@ -6,6 +6,7 @@
 */
 
 #include <fstream>
+#include <error/Error.hpp>
 #include "../inc/console/speach.hpp"
 #include "../inc/nts.hpp"
 #include "../inc/core/Core.hpp"
@@ -33,8 +34,17 @@ int main(int ac, char **av)
 
     if (check_error(ac, av[1]))
         return (84);
-    nts::parser.load(av[1]);
-    while (nts::Core::inCore)
-        core.getValue();
+    try {
+        nts::parser.load(av[1]);
+    } catch (const nts::Error &e) {
+        speach::error(e.what());
+    }
+    while (nts::Core::inCore) {
+        try {
+            core.getValue();
+        } catch (const nts::Error &e) {
+            speach::error(e.what());
+        }
+    }
     return (0);
 }
