@@ -41,16 +41,35 @@ static void format(std::string& str)
 
 bool nts::Parser::createComponent(const std::string& firstArg, const std::string& secondArg, int line)
 {
-    if (m_componentMap.find(secondArg) != m_componentMap.end()) {
-        speach::error("ERROR: There is already a component name <" + secondArg + ">. Check at line " + std::to_string(line));
+    std::string name = secondArg;
+    nts::Tristate state = nts::UNDEFINED;
+
+    std::size_t valuePos = secondArg.find_first_of('(');
+    std::size_t valueEndPos = secondArg.find_last_of(')');
+
+    if (valuePos != std::string::npos
+    && valueEndPos != std::string::npos
+    && valuePos < valueEndPos) {
+        name = secondArg.substr(valuePos + 1, valueEndPos - valuePos - 1);
+        if (name == "1" || name == "2" || name == "U")
+            state = (name == "1" ? nts::TRUE : (name == "0" ? nts::FALSE : nts::UNDEFINED));
+        else
+            throw std::exception();
+        name = secondArg.substr(0, valuePos);
+    }
+
+    if (m_componentMap.find(name) != m_componentMap.end()) {
+        speach::error("ERROR: There is already a component name <" + name + ">. Check at line " + std::to_string(line));
         return (false);
     }
-    m_componentMap[secondArg] = nts::Factory::createComponent(firstArg, secondArg);
+
+    m_componentMap[name] = nts::Factory::createComponent(firstArg, name, state);
     return (true);
 }
 
 bool nts::Parser::linkComponent(const std::string& firstArg, const std::string& secondArg, int line)
 {
+
     if (std::count(firstArg.begin(), firstArg.end(), ':') != 1
     && std::count(secondArg.begin(), secondArg.end(), ':') != 1) {
         speach::error("ERROR: Wrong format at line " + std::to_string(line) + " <" + firstArg + " " + secondArg + ">");
@@ -62,7 +81,7 @@ bool nts::Parser::linkComponent(const std::string& firstArg, const std::string& 
     std::string secondArgName = secondArg.substr(0, secondArg.find_first_of(':'));
     std::size_t secondArgPin = std::stoul(secondArg.substr(secondArg.find_first_of(':') + 1));
 
-    m_componentMap[firstArgName].get()->setLink(firstArgPin, *m_componentMap[secondArgName], secondArgPin);
+    m_componentMap[firstArgName].get()->setLink(firstArgPin, *m_componentMap[secondArgName].get(), secondArgPin);
     return (true);
 }
 

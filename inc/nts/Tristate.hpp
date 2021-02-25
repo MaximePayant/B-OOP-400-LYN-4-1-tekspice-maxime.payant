@@ -20,7 +20,6 @@ namespace nts
         TRUE = true,
         FALSE = false
 
-
     }; // enum Tristate
 
 } // namespace nts
