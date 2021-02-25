@@ -5,6 +5,7 @@
 ** AComponent.cpp
 */
 
+#include <error/Error.hpp>
 #include "../../inc/console/speach.hpp"
 #include "../../inc/factory/Parser.hpp"
 #include "../../inc/component/Component.hpp"
@@ -19,9 +20,9 @@ nts::Tristate nts::Component::compute(std::size_t pin)
     auto it = m_pinMap.find(pin);
 
     if (it == m_pinMap.end())
-        throw std::exception();
+        throw nts::Error("Pin [" + std::to_string(pin) +"] not found!");
     if (!it->second.m_component.has_value())
-        throw std::exception();
+        throw nts::Error("Pin [" + std::to_string(pin) +"] doesn't have a value!");
     return (it->second.m_state);
 }
 
@@ -32,12 +33,13 @@ void nts::Component::setLink(std::size_t pin, nts::IComponent &other, std::size_
     if (m_pinMap.count(pin)
     && otherCpt.m_pinMap.count(otherPin)) {
         if (m_pinMap[pin].m_type == otherCpt.m_pinMap[otherPin].m_type)
-            throw std::exception();
+            throw nts::Error("You cannot link a pin to himself!");
         m_pinMap[pin].m_component.emplace(otherCpt);
         otherCpt.m_pinMap[otherPin].m_component.emplace(*this);
     }
     else
-        throw std::exception();
+        throw nts::Error("Pin [" + std::to_string(pin) + "] or other pin ["
+                                  + std::to_string(otherPin) + "] dose not exist!");
 }
 
 void nts::Component::dump() const

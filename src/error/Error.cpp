@@ -7,5 +7,5 @@
 
 #include "error/Error.hpp"
 
-Error::Error(std::string message) : runtime_error(message)
+nts::Error::Error(std::string message) : runtime_error(message)
 {}

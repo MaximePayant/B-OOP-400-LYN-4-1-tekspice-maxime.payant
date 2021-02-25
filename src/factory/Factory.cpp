@@ -5,8 +5,8 @@
 ** Factory.cpp
 */
 
+#include <error/Error.hpp>
 #include "../../inc/console/speach.hpp"
-
 #include "../../inc/factory/Factory.hpp"
 #include "../../inc/component/component.hpp"
 
@@ -28,5 +28,5 @@ std::unique_ptr<nts::IComponent> nts::Factory::createComponent(const std::string
 {
     if (m_createFunc.find(type) != m_createFunc.end())
         return (m_createFunc[type](name));
-    throw std::exception(); // Make nts exception
+    throw nts::Error("Component not found!");
 }

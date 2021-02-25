@@ -28,8 +28,8 @@ namespace nts
 
             bool checkState(ParserState& pState, const std::string& buffer) const;
             bool checkLine(const ParserState& pState, const std::string& buffer, int line);
-            bool createComponent(const std::string& firstArg, const std::string& secondArg, int line);
-            bool linkComponent(const std::string& firstArg, const std::string& secondArg, int line);
+            void createComponent(const std::string& firstArg, const std::string& secondArg, int line);
+            void linkComponent(const std::string& firstArg, const std::string& secondArg, int line);
 
         public:
             Parser() = default;
