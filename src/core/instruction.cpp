@@ -10,25 +10,52 @@
 #include <csignal>
 #include "../../inc/core/Core.hpp"
 #include "../../inc/factory/Parser.hpp"
+#include "../../inc/component/Component.hpp"
+#include "console/speach.hpp"
 
-void Core::display()
+static bool isInput(const std::string& str)
 {
-    for (auto &component : nts::parser.m_componentMap) {
-
-    }
+    if (str == "input"
+    || str == "true"
+    || str == "false"
+    || str == "clock")
+        return (true);
+    return (false);
 }
 
-void Core::setInput(std::string var, std::string value)
+void nts::Core::display()
 {
-    std::cout << "Set variable:[" << var << "] with value:[" << value << "]" << std::endl;
+    speach::disp("tick: " + std::to_string(tick));
+    speach::disp("input(s):");
+    for (auto& [name, cpt] : nts::parser)
+        if (isInput(cpt.get()->getType()))
+            speach::disp("  " + name + ": " + to_string(cpt.get()->compute(1)));
+    speach::disp("output(s):");
+    for (auto& [name, cpt] : nts::parser)
+        if (cpt.get()->getType() == "output")
+            speach::disp("  " + name + ": " + to_string(cpt.get()->compute(1)));
 }
 
-void Core::simulate()
+void nts::Core::setInput(std::string var, std::string value)
 {
+    auto it = nts::parser.find(var);
+    nts::Tristate state = (value == "1" ? nts::TRUE : (value == "0" ? nts::FALSE : nts::UNDEFINED));
+
+    if (it == nts::parser.end())
+        throw std::exception();
+    else if (it->second.get()->getType() != "input"
+    && it->second.get()->getType() != "clock")
+        throw std::exception();
+    dynamic_cast<nts::Component*>(it->second.get())->m_pinMap[1].m_state = state;
+}
+
+void nts::Core::simulate()
+{
+    tick += 1;
     std::cout << "Starting simulation" << std::endl;
 }
 
-void Core::loop()
+void nts::Core::loop()
 {
     while (isLoop) {
         simulate();
@@ -37,7 +64,8 @@ void Core::loop()
     }
 }
 
-void Core::dump()
+void nts::Core::dump()
 {
-    std::cout << "Dump" << std::endl;
+    for (auto& [_, cpt] : nts::parser)
+        cpt.get()->dump();
 }

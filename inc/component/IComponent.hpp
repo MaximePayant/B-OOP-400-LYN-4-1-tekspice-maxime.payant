@@ -8,6 +8,7 @@
 #ifndef NTS_ICOMPONENT_HPP
 #define NTS_ICOMPONENT_HPP
 
+#include <string>
 #include <cstddef>
 
 #include "../nts/Tristate.hpp"
@@ -20,6 +21,9 @@ namespace nts
 
         public:
             virtual ~IComponent () = default;
+
+            virtual const std::string& getName() const = 0;
+            virtual const std::string& getType() const = 0;
 
             virtual Tristate compute(std::size_t pin) = 0;
             virtual void setLink(std::size_t pin, IComponent &other, std::size_t otherPin) = 0;

@@ -2,32 +2,29 @@
 ** EPITECH PROJECT, 2021
 ** Core.cpp.cc
 ** File description:
-** 
+**
 */
 
 #include <iostream>
 #include <csignal>
 #include "../../inc/core/Core.hpp"
 
-bool Core::isLoop = true;
+bool nts::Core::isLoop = true;
+bool nts::Core::inCore = true;
+std::size_t nts::Core::tick = 0;
 
-void signalHandler(int signum)
+static void signalHandler(int signum)
 {
     (void) signum;
-    Core::isLoop = false;
+    nts::Core::isLoop = false;
 }
 
-Core::Core() : inCore(true)
+nts::Core::Core()
 {
     signal(SIGINT, signalHandler);
 }
 
-bool Core::isInCore() const
-{
-    return (inCore);
-}
-
-void Core::getValue()
+void nts::Core::getValue()
 {
     std::string out;
 

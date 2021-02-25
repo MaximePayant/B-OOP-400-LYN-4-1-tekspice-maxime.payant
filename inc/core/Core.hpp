@@ -10,25 +10,32 @@
 
 #include <string>
 
-class Core
+namespace nts
 {
-private:
-    bool inCore;
 
-public:
-    static bool isLoop;
+    class Core
+    {
 
-    Core();
-    ~Core() = default;
-    [[nodiscard]] bool isInCore() const;
-    void getValue();
-    void display();
-    void setInput(std::string var, std::string value);
-    void simulate();
-    void loop();
-    void dump();
-};
+        private:
+            void display();
+            void setInput(std::string var, std::string value);
+            void simulate();
+            void loop();
+            void dump();
 
-void signalHandler(int signum);
+        public:
+            static std::size_t tick;
+            static bool inCore;
+            static bool isLoop;
+
+            Core();
+            ~Core() = default;
+
+            void getValue();
+
+    }; // class Core
+
+} // namespace nts
+
 
 #endif //B_OOP_400_LYN_4_1_TEKSPICE_GUILLAUME_SOISSON_CORE

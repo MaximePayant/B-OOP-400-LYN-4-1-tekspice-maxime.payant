@@ -9,48 +9,32 @@
 #include "../../inc/factory/Parser.hpp"
 #include "../../inc/component/Component.hpp"
 
-nts::Component::Component(const std::string& name, const std::string& type, nts::Tristate state) :
+nts::Component::Component(const std::string& name, const std::string& type) :
     m_name(name),
-    m_type(type),
-    m_state(state)
+    m_type(type)
 {}
 
 nts::Tristate nts::Component::compute(std::size_t pin)
 {
-    auto it = m_inputPinMap.find(pin);
+    auto it = m_pinMap.find(pin);
 
-    if (it == m_inputPinMap.end())
-        it = m_outputPinMap.find(pin);
-    if (it == m_outputPinMap.end())
+    if (it == m_pinMap.end())
         throw std::exception();
-    if (!it->second.has_value())
+    if (!it->second.m_component.has_value())
         throw std::exception();
-    return (dynamic_cast<nts::Component&>(it->second.value().get()).m_state);
+    return (it->second.m_state);
 }
 
 void nts::Component::setLink(std::size_t pin, nts::IComponent &other, std::size_t otherPin)
 {
     nts::Component& otherCpt = dynamic_cast<nts::Component&>(other);
 
-    if (m_inputPinMap.count(pin)) {
-        if (otherCpt.m_inputPinMap.count(otherPin))
+    if (m_pinMap.count(pin)
+    && otherCpt.m_pinMap.count(otherPin)) {
+        if (m_pinMap[pin].m_type == otherCpt.m_pinMap[otherPin].m_type)
             throw std::exception();
-        else if (!otherCpt.m_outputPinMap.count(otherPin))
-            throw std::exception();
-        else {
-            *m_inputPinMap[pin] = otherCpt;
-            *otherCpt.m_outputPinMap[otherPin] = *this;
-        }
-    }
-    else if (m_outputPinMap.count(pin)) {
-        if (otherCpt.m_outputPinMap.count(otherPin))
-            throw std::exception();
-        else if (!otherCpt.m_inputPinMap.count(otherPin))
-            throw std::exception();
-        else {
-            *m_outputPinMap[pin] = otherCpt;
-            *otherCpt.m_inputPinMap[otherPin] = *this;
-        }
+        m_pinMap[pin].m_component.emplace(otherCpt);
+        otherCpt.m_pinMap[otherPin].m_component.emplace(*this);
     }
     else
         throw std::exception();
@@ -58,13 +42,17 @@ void nts::Component::setLink(std::size_t pin, nts::IComponent &other, std::size_
 
 void nts::Component::dump() const
 {
-    speach::disp(m_type + " - " + m_name);
-    speach::disp("input(s):");
-    for (auto &[_, cpt] : m_inputPinMap)
-        speach::disp(dynamic_cast<nts::Component&>(cpt->get()).m_name + ": " + to_string(m_state));
-    speach::disp("output(s):");
-    for (auto &[_, cpt] : m_outputPinMap)
-        speach::disp(dynamic_cast<nts::Component&>(cpt->get()).m_name + ": " + to_string(m_state));
+    speach::disp(m_name + " - " + m_type);
+    speach::disp("Link(s):");
+    for (auto &[pin, cptInfo] : m_pinMap) {
+        if (!cptInfo.m_component.has_value())
+            continue;
+        std::cout << "Pin " << pin
+                  << (cptInfo.m_type ? " [OUTPUT]" : " [INPUT]") << ": "
+                  << cptInfo.m_component.value().get().getName()
+                  << " - " << cptInfo.m_component.value().get().getType()
+                  << " {" << to_string(cptInfo.m_state) << "}" << std::endl;
+    }
     speach::disp("");
 }
 

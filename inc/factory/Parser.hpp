@@ -36,10 +36,17 @@ namespace nts
             ~Parser() = default;
 
             void load(const std::string& filename);
-        friend Core;
+
+            std::map<std::string, std::unique_ptr<nts::IComponent>>::iterator begin()
+            { return (m_componentMap.begin()); }
+            std::map<std::string, std::unique_ptr<nts::IComponent>>::iterator end()
+            { return (m_componentMap.end()); }
+            std::map<std::string, std::unique_ptr<nts::IComponent>>::iterator find(const std::string& key)
+            { return (m_componentMap.find(key)); }
+
     };
 
-    static Parser parser;
+    extern Parser parser;
 
 } // namespace nts
 

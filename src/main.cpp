@@ -29,12 +29,12 @@ bool check_error(int ac, char *str)
 
 int main(int ac, char **av)
 {
-    Core core;
+    nts::Core core;
 
     if (check_error(ac, av[1]))
         return (84);
     nts::parser.load(av[1]);
-    while (core.isInCore())
+    while (nts::Core::inCore)
         core.getValue();
     return (0);
 }

@@ -13,31 +13,44 @@
 #include <optional>
 #include <functional>
 #include "IComponent.hpp"
+#include "../core/Core.hpp"
 
 namespace nts
 {
+
 
     class Component :
         public IComponent
     {
 
         protected:
+            class CptInfo
+            {
+                public:
+                    enum {INPUT, OUTPUT} m_type;
+                    Tristate m_state;
+                    std::optional<std::reference_wrapper<IComponent>> m_component;
+            };
+
             const std::string m_name;
             const std::string m_type;
 
-            Tristate m_state;
-            std::map<std::size_t, std::optional<std::reference_wrapper<IComponent>>> m_inputPinMap;
-            std::map<std::size_t, std::optional<std::reference_wrapper<IComponent>>> m_outputPinMap;
+            std::map<std::size_t, CptInfo> m_pinMap;
 
-            Component(const std::string& name, const std::string& type, Tristate state);
+            Component(const std::string& name, const std::string& type);
 
         public:
             ~Component() = default;
+
+            const std::string& getName() const override { return (m_name); }
+            const std::string& getType() const override { return (m_type); }
 
             Tristate compute(std::size_t pin) override;
             void setLink(std::size_t pin, IComponent &other, std::size_t otherPin) override;
             void simulate(std::size_t tick);
             void dump() const;
+
+            friend Core;
 
     };
 

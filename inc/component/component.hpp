@@ -8,6 +8,10 @@
 #ifndef NTS_COMPONENT_HPP
 #define NTS_COMPONENT_HPP
 
-#include "Template.hpp"
+#include "normal/4001.hpp"
+#include "special/False.hpp"
+#include "special/Input.hpp"
+#include "special/Output.hpp"
+#include "special/True.hpp"
 
 #endif // NTS_COMPONENT_HPP
