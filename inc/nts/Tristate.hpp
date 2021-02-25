@@ -22,7 +22,28 @@ namespace nts
 
     }; // enum Tristate
 
+
 } // namespace nts
+
+inline nts::Tristate operator||(const nts::Tristate& left, const nts::Tristate& right)
+{
+    if (left == nts::TRUE
+    || right == nts::TRUE)
+        return (nts::TRUE);
+    if (left == nts::FALSE
+    || right == nts::FALSE)
+        return (nts::FALSE);
+    return (nts::UNDEFINED);
+}
+
+inline nts::Tristate operator!(const nts::Tristate& state)
+{
+    if (state == nts::UNDEFINED)
+        return (nts::UNDEFINED);
+    if (state == nts::TRUE)
+        return (nts::FALSE);
+    return (nts::TRUE);
+}
 
 inline std::string to_string(nts::Tristate value)
 {

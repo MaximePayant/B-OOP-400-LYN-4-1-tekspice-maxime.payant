@@ -8,7 +8,7 @@
 #ifndef NTS_ACOMPONENT_HPP
 #define NTS_ACOMPONENT_HPP
 
-#include <map>
+#include <unordered_map>
 #include <string>
 #include <optional>
 #include <functional>
@@ -29,13 +29,14 @@ namespace nts
                 public:
                     enum {INPUT, OUTPUT} m_type;
                     Tristate m_state;
+                    std::size_t m_linkedPin;
                     std::optional<std::reference_wrapper<IComponent>> m_component;
             };
 
             const std::string m_name;
             const std::string m_type;
 
-            std::map<std::size_t, CptInfo> m_pinMap;
+            std::unordered_map<std::size_t, CptInfo> m_pinMap;
 
             Component(const std::string& name, const std::string& type);
 

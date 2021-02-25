@@ -11,18 +11,13 @@ nts::Output::Output(const std::string& name, nts::Tristate state) :
     nts::Component(name, "output")
 {
     (void)state;
-    m_pinMap[1] = {CptInfo::INPUT, nts::UNDEFINED, std::nullopt};
+    m_pinMap[1] = {CptInfo::INPUT, nts::UNDEFINED, 0, std::nullopt};
 }
 
 void nts::Output::simulate(std::size_t tick)
 {
-    for (auto& [pin, cptInfo] : m_pinMap)
-        if (cptInfo.m_type == CptInfo::INPUT
-        && cptInfo.m_component.has_value())
-            cptInfo.m_component.value().get().simulate(tick);
-    if (m_pinMap[1].m_type == CptInfo::INPUT
-    && m_pinMap[1].m_component.has_value()) {
+    if (m_pinMap[1].m_component.has_value()) {
         m_pinMap[1].m_component.value().get().simulate(tick);
-        m_pinMap[1].m_state = compute(1);
+        m_pinMap[1].m_state = m_pinMap[1].m_component.value().get().compute(m_pinMap[1].m_linkedPin);
     }
 }

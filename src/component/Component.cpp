@@ -20,9 +20,9 @@ nts::Tristate nts::Component::compute(std::size_t pin)
     auto it = m_pinMap.find(pin);
 
     if (it == m_pinMap.end())
-        throw nts::Error("Pin [" + std::to_string(pin) +"] not found!");
+        throw nts::Error("ERROR: Pin [" + std::to_string(pin) +"] not found!");
     if (!it->second.m_component.has_value())
-        throw nts::Error("Pin [" + std::to_string(pin) +"] doesn't have a value!");
+        throw nts::Error("ERROR: Pin [" + std::to_string(pin) +"] doesn't have a value!");
     return (it->second.m_state);
 }
 
@@ -33,13 +33,15 @@ void nts::Component::setLink(std::size_t pin, nts::IComponent &other, std::size_
     if (m_pinMap.count(pin)
     && otherCpt.m_pinMap.count(otherPin)) {
         if (m_pinMap[pin].m_type == otherCpt.m_pinMap[otherPin].m_type)
-            throw nts::Error("You cannot link a pin to himself!");
+            throw nts::Error("ERROR: You can't link two Input or two Output.");
         m_pinMap[pin].m_component.emplace(otherCpt);
+        m_pinMap[pin].m_linkedPin = otherPin;
         otherCpt.m_pinMap[otherPin].m_component.emplace(*this);
+        otherCpt.m_pinMap[otherPin].m_linkedPin = pin;
     }
     else
-        throw nts::Error("Pin [" + std::to_string(pin) + "] or other pin ["
-                                  + std::to_string(otherPin) + "] dose not exist!");
+        throw nts::Error("ERROR: Pin [" + std::to_string(pin) + "] or other pin ["
+                                        + std::to_string(otherPin) + "] doesn't exist!");
 }
 
 void nts::Component::dump() const

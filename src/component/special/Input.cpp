@@ -10,5 +10,5 @@
 nts::Input::Input(const std::string& name, nts::Tristate state) :
     nts::Component(name, "input")
 {
-    m_pinMap[1] = {CptInfo::OUTPUT, state, std::nullopt};
+    m_pinMap[1] = {CptInfo::OUTPUT, state, 0, std::nullopt};
 }

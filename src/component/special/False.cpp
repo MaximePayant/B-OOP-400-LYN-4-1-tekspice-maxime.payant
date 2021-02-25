@@ -11,5 +11,5 @@ nts::False::False(const std::string& name, nts::Tristate state) :
     nts::Component(name, "false")
 {
     (void)state;
-    m_pinMap[1] = {CptInfo::OUTPUT, nts::FALSE, std::nullopt};
+    m_pinMap[1] = {CptInfo::OUTPUT, nts::FALSE, 0, std::nullopt};
 }

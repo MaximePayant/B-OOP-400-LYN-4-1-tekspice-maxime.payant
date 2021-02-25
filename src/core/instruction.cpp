@@ -57,7 +57,9 @@ void nts::Core::setInput(std::string var, std::string value)
 void nts::Core::simulate()
 {
     tick += 1;
-    std::cout << "Starting simulation" << std::endl;
+    for (auto& [_, cpt] : nts::parser)
+        if (cpt.get()->getType() == "output")
+            cpt.get()->simulate(tick);
 }
 
 void nts::Core::loop()
