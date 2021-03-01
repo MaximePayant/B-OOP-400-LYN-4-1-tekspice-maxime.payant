@@ -25,6 +25,17 @@ namespace nts
 
 } // namespace nts
 
+inline nts::Tristate operator&&(const nts::Tristate& left, const nts::Tristate& right)
+{
+    if (left == nts::TRUE
+        && right == nts::TRUE)
+        return (nts::TRUE);
+    if (left == nts::FALSE
+        || right == nts::FALSE)
+        return (nts::FALSE);
+    return (nts::UNDEFINED);
+}
+
 inline nts::Tristate operator||(const nts::Tristate& left, const nts::Tristate& right)
 {
     if (left == nts::TRUE
