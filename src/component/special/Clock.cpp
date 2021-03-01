@@ -10,8 +10,7 @@
 nts::Clock::Clock(const std::string& name, nts::Tristate state) :
     nts::Component(name, "clock")
 {
-    (void)state;
-    m_pinMap[1] = {CptInfo::OUTPUT, nts::UNDEFINED, 0, std::nullopt};
+    m_pinMap[1] = {CptInfo::OUTPUT, state, 0, std::nullopt};
 }
 
 void nts::Clock::simulate(std::size_t tick)
