@@ -55,5 +55,9 @@ void nts::Parser::linkComponent(const std::string& firstArg, const std::string& 
     std::string secondArgName = secondArg.substr(0, secondArg.find_first_of(':'));
     std::size_t secondArgPin = std::stoul(secondArg.substr(secondArg.find_first_of(':') + 1));
 
+    if (m_componentMap.find(firstArgName) == m_componentMap.end())
+        throw nts::Error("ERROR: Wrong argument <" + firstArgName + ">. Component doesn't exist.");
+    if (m_componentMap.find(secondArgName) == m_componentMap.end())
+        throw nts::Error("ERROR: Wrong argument <" + secondArgName + ">. Component doesn't exist.");
     m_componentMap[firstArgName].get()->setLink(firstArgPin, *m_componentMap[secondArgName], secondArgPin);
 }
