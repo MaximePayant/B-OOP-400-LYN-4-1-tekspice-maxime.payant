@@ -39,10 +39,10 @@ inline nts::Tristate operator&&(const nts::Tristate& left, const nts::Tristate& 
     if (left == nts::TRUE
         && right == nts::TRUE)
         return (nts::TRUE);
-    if (left == nts::FALSE
-        || right == nts::FALSE)
-        return (nts::FALSE);
-    return (nts::UNDEFINED);
+    if (left == nts::UNDEFINED
+        && right == nts::UNDEFINED)
+        return (nts::UNDEFINED);
+    return (nts::FALSE);
 }
 
 inline nts::Tristate operator||(const nts::Tristate& left, const nts::Tristate& right)
