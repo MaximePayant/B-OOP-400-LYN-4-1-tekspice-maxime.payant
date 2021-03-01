@@ -26,15 +26,6 @@ nts::Component4030::Component4030(const std::string& name, nts::Tristate state) 
 
 }
 
-static nts::Tristate xor_sim(nts::Tristate cmp1, nts::Tristate cmp2)
-{
-    if ((cmp1 == true && cmp2 == false) || (cmp1 == false && cmp2 == true))
-        return (nts::TRUE);
-    if (cmp1 == nts::UNDEFINED && cmp2 == nts::UNDEFINED)
-        return (nts::UNDEFINED);
-    return (nts::FALSE);
-}
-
 void nts::Component4030::simulate(std::size_t tick)
 {
     if (m_tick >= tick)
@@ -42,14 +33,14 @@ void nts::Component4030::simulate(std::size_t tick)
     m_tick += 1;
     simulatePin(m_pinMap[1], tick);
     simulatePin(m_pinMap[2], tick);
-    m_pinMap[3].m_state = xor_sim(m_pinMap[1].m_state, m_pinMap[2].m_state);
+    m_pinMap[3].m_state = m_pinMap[1].m_state ^ m_pinMap[2].m_state;
     simulatePin(m_pinMap[5], tick);
     simulatePin(m_pinMap[6], tick);
-    m_pinMap[4].m_state = xor_sim(m_pinMap[5].m_state, m_pinMap[6].m_state);
+    m_pinMap[4].m_state = m_pinMap[5].m_state ^ m_pinMap[6].m_state;
     simulatePin(m_pinMap[13], tick);
     simulatePin(m_pinMap[14], tick);
-    m_pinMap[11].m_state = xor_sim(m_pinMap[14].m_state, m_pinMap[13].m_state);
+    m_pinMap[11].m_state = m_pinMap[14].m_state ^ m_pinMap[13].m_state;
     simulatePin(m_pinMap[8], tick);
     simulatePin(m_pinMap[9], tick);
-    m_pinMap[12].m_state = xor_sim(m_pinMap[8].m_state, m_pinMap[9].m_state);
+    m_pinMap[12].m_state = m_pinMap[8].m_state ^ m_pinMap[9].m_state;
 }

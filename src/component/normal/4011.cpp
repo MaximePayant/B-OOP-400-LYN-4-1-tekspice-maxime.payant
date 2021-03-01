@@ -2,13 +2,13 @@
 ** EPITECH PROJECT, 2021
 ** Component4011.cpp.cc
 ** File description:
-** 
+**
 */
 
-#include "component/normal/Component4011.hpp"
+#include "component/normal/4011.hpp"
 
 nts::Component4011::Component4011(const std::string &name, nts::Tristate state) :
-Component(name, "4011")
+    nts::Component(name, "4011")
 {
     (void) state;
     m_pinMap[3] = {CptInfo::OUTPUT, nts::UNDEFINED, 0, std::nullopt};

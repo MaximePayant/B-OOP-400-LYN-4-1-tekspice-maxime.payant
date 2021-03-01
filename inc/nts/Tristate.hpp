@@ -25,6 +25,15 @@ namespace nts
 
 } // namespace nts
 
+inline nts::Tristate operator^(const nts::Tristate& cmp1, const nts::Tristate& cmp2)
+{
+    if ((cmp1 == true && cmp2 == false) || (cmp1 == false && cmp2 == true))
+        return (nts::TRUE);
+    if (cmp1 == nts::UNDEFINED && cmp2 == nts::UNDEFINED)
+        return (nts::UNDEFINED);
+    return (nts::FALSE);
+}
+
 inline nts::Tristate operator&&(const nts::Tristate& left, const nts::Tristate& right)
 {
     if (left == nts::TRUE

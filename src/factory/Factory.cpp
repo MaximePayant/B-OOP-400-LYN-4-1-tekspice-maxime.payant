@@ -6,7 +6,6 @@
 */
 
 #include <error/Error.hpp>
-#include <normal/Component4011.hpp>
 #include "../../inc/console/speach.hpp"
 #include "../../inc/factory/Factory.hpp"
 #include "../../inc/component/component.hpp"

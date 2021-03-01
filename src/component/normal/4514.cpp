@@ -15,4 +15,7 @@ nts::Component4514::Component4514(const std::string& name, nts::Tristate state) 
 
 void nts::Component4514::simulate(std::size_t tick)
 {
+    if (m_tick >= tick)
+        return;
+    m_tick += 1;
 }

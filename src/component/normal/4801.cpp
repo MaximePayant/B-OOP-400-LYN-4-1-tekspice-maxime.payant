@@ -15,4 +15,7 @@ nts::Component4801::Component4801(const std::string& name, nts::Tristate state) 
 
 void nts::Component4801::simulate(std::size_t tick)
 {
+    if (m_tick >= tick)
+        return;
+    m_tick += 1;
 }
