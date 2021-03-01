@@ -41,7 +41,7 @@ namespace nts
 
             Component(const std::string& name, const std::string& type);
 
-            void simulatePin(CptInfo cpt, std::size_t tick);
+            void simulatePin(CptInfo& cpt, std::size_t tick);
 
         public:
             ~Component() = default;

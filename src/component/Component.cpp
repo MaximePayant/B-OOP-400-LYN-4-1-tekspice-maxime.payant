@@ -61,7 +61,7 @@ void nts::Component::dump() const
     speach::disp("");
 }
 
-void nts::Component::simulatePin(CptInfo cpt, std::size_t tick)
+void nts::Component::simulatePin(CptInfo& cpt, std::size_t tick)
 {
     if (cpt.m_component.has_value()) {
         cpt.m_component.value().get().simulate(tick);
