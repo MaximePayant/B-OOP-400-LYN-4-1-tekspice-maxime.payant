@@ -29,7 +29,33 @@ nts::Component4013::Component4013(const std::string& name, nts::Tristate state) 
 
 void nts::Component4013::simulate(std::size_t tick)
 {
+    nts::Tristate tmp;
+    nts::Tristate tmp1;
+    nts::Tristate tmp11;
+    nts::Tristate save_output;
+
     if (m_tick >= tick)
         return;
     m_tick += 1;
+    simulatePin(m_pinMap[3], tick);
+    simulatePin(m_pinMap[4], tick);
+    simulatePin(m_pinMap[5], tick);
+    simulatePin(m_pinMap[6], tick);
+    tmp = m_pinMap[3].m_state && m_pinMap[5].m_state;
+    tmp1 = !(m_pinMap[6].m_state && tmp);
+    tmp11 = !(m_pinMap[4].m_state && tmp);
+    save_output = m_pinMap[1].m_state;
+    m_pinMap[1].m_state = !(tmp1 && m_pinMap[2].m_state);
+    m_pinMap[2].m_state = !(tmp11 && save_output);
+
+    simulatePin(m_pinMap[8], tick);
+    simulatePin(m_pinMap[9], tick);
+    simulatePin(m_pinMap[10], tick);
+    simulatePin(m_pinMap[11], tick);
+    tmp = m_pinMap[8].m_state && m_pinMap[10].m_state;
+    tmp1 = !(m_pinMap[11].m_state && tmp);
+    tmp11 = !(m_pinMap[9].m_state && tmp);
+    save_output = m_pinMap[12].m_state;
+    m_pinMap[12].m_state = !(tmp1 && m_pinMap[13].m_state);
+    m_pinMap[13].m_state = !(tmp11 && save_output);
 }
