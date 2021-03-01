@@ -25,19 +25,11 @@ nts::Component4001::Component4001(const std::string& name, nts::Tristate state) 
     m_pinMap[13] = {CptInfo::INPUT,  nts::UNDEFINED, 0, std::nullopt};
 }
 
-static void simulatePin(std::optional<std::reference_wrapper<nts::IComponent>>& cpt,
-                        nts::Tristate& state,
-                        std::size_t linkedPin,
-                        std::size_t tick)
-{
-    if (cpt.has_value()) {
-        cpt.value().get().simulate(tick);
-        state = cpt.value().get().compute(linkedPin);
-    }
-}
-
 void nts::Component4001::simulate(std::size_t tick)
 {
+    if (m_tick >= tick)
+        return;
+    m_tick += 1;
     simulatePin(m_pinMap[1].m_component, m_pinMap[1].m_state, m_pinMap[1].m_linkedPin, tick);
     simulatePin(m_pinMap[2].m_component, m_pinMap[2].m_state, m_pinMap[2].m_linkedPin, tick);
     m_pinMap[3].m_state = !(m_pinMap[1].m_state || m_pinMap[2].m_state);

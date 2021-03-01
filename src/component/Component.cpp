@@ -12,7 +12,8 @@
 
 nts::Component::Component(const std::string& name, const std::string& type) :
     m_name(name),
-    m_type(type)
+    m_type(type),
+    m_tick(0)
 {}
 
 nts::Tristate nts::Component::compute(std::size_t pin)
@@ -60,7 +61,20 @@ void nts::Component::dump() const
     speach::disp("");
 }
 
+void nts::Component::simulatePin(std::optional<std::reference_wrapper<nts::IComponent>>& cpt,
+                                 nts::Tristate& state,
+                                 std::size_t linkedPin,
+                                 std::size_t tick)
+{
+    if (cpt.has_value()) {
+        cpt.value().get().simulate(tick);
+        state = cpt.value().get().compute(linkedPin);
+    }
+}
+
 void nts::Component::simulate(std::size_t tick)
 {
-    (void)tick;
+    if (m_tick >= tick)
+        return;
+    m_tick += 1;
 }

@@ -37,8 +37,14 @@ namespace nts
             const std::string m_type;
 
             std::unordered_map<std::size_t, CptInfo> m_pinMap;
+            std::size_t m_tick;
 
             Component(const std::string& name, const std::string& type);
+
+            void simulatePin(std::optional<std::reference_wrapper<nts::IComponent>>& cpt,
+                             nts::Tristate& state,
+                             std::size_t linkedPin,
+                             std::size_t tick);
 
         public:
             ~Component() = default;
