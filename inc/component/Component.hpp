@@ -18,7 +18,6 @@
 namespace nts
 {
 
-
     class Component :
         public IComponent
     {

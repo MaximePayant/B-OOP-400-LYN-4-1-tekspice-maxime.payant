@@ -13,6 +13,7 @@
 #include "../../inc/factory/Parser.hpp"
 #include "../../inc/component/Component.hpp"
 #include "../../inc/component/special/Clock.hpp"
+#include "../../inc/component/special/Input.hpp"
 #include "console/speach.hpp"
 
 static bool isInput(const std::string& str)
@@ -49,8 +50,10 @@ void nts::Core::setInput(std::string var, std::string value)
         throw nts::Error("ERROR: Wrong value!");
     if (it == nts::parser.end())
         throw nts::Error("ERROR: Component not found!");
-    else if (it->second.get()->getType() == "input")
-        dynamic_cast<nts::Component*>(it->second.get())->m_pinMap[1].m_state = state;
+    else if (it->second.get()->getType() == "input") {
+        dynamic_cast<nts::Input*>(it->second.get())->m_needChange = true;
+        dynamic_cast<nts::Input*>(it->second.get())->m_waitingState = state;
+    }
     else if (it->second.get()->getType() == "clock") {
         dynamic_cast<nts::Clock*>(it->second.get())->m_needChange = true;
         dynamic_cast<nts::Clock*>(it->second.get())->m_waitingState = state;

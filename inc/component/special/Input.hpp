@@ -17,9 +17,15 @@ namespace nts
         public Component
     {
 
+        private:
+            bool m_needChange;
+            nts::Tristate m_waitingState;
+
         public:
             Input(const std::string& name, nts::Tristate state);
             ~Input() = default;
+
+        friend Core;
 
     }; // class Input
 
