@@ -6,6 +6,7 @@
 */
 
 #include <error/Error.hpp>
+#include <normal/Component4011.hpp>
 #include "../../inc/console/speach.hpp"
 #include "../../inc/factory/Factory.hpp"
 #include "../../inc/component/component.hpp"
@@ -18,6 +19,7 @@ static std::unique_ptr<nts::IComponent> createComponentBis(const std::string& na
 
 std::unordered_map<std::string, std::unique_ptr<nts::IComponent> (*)(const std::string&, nts::Tristate state)> nts::Factory::m_createFunc = {
     {"2716", createComponentBis<nts::Component2716>},
+    {"4011", createComponentBis<nts::Component4011>},
     {"4001", createComponentBis<nts::Component4001>},
     {"4008", createComponentBis<nts::Component4008>},
     {"4013", createComponentBis<nts::Component4013>},

@@ -14,12 +14,12 @@ Component(name, "4011")
     m_pinMap[3] = {CptInfo::OUTPUT, nts::UNDEFINED, 0, std::nullopt};
     m_pinMap[4] = {CptInfo::OUTPUT, nts::UNDEFINED, 0, std::nullopt};
     m_pinMap[11] = {CptInfo::OUTPUT, nts::UNDEFINED, 0, std::nullopt};
-    m_pinMap[12] = {CptInfo::OUTPUT, nts::UNDEFINED, 0, std::nullopt};
+    m_pinMap[10] = {CptInfo::OUTPUT, nts::UNDEFINED, 0, std::nullopt};
     m_pinMap[1] = {CptInfo::INPUT, nts::UNDEFINED, 0, std::nullopt};
     m_pinMap[2] = {CptInfo::INPUT, nts::UNDEFINED, 0, std::nullopt};
     m_pinMap[5] = {CptInfo::INPUT, nts::UNDEFINED, 0, std::nullopt};
     m_pinMap[6] = {CptInfo::INPUT, nts::UNDEFINED, 0, std::nullopt};
-    m_pinMap[14] = {CptInfo::INPUT, nts::UNDEFINED, 0, std::nullopt};
+    m_pinMap[12] = {CptInfo::INPUT, nts::UNDEFINED, 0, std::nullopt};
     m_pinMap[13] = {CptInfo::INPUT, nts::UNDEFINED, 0, std::nullopt};
     m_pinMap[9] = {CptInfo::INPUT, nts::UNDEFINED, 0, std::nullopt};
     m_pinMap[8] = {CptInfo::INPUT, nts::UNDEFINED, 0, std::nullopt};
