@@ -41,10 +41,7 @@ namespace nts
 
             Component(const std::string& name, const std::string& type);
 
-            void simulatePin(std::optional<std::reference_wrapper<nts::IComponent>>& cpt,
-                             nts::Tristate& state,
-                             std::size_t linkedPin,
-                             std::size_t tick);
+            void simulatePin(CptInfo cpt, std::size_t tick);
 
         public:
             ~Component() = default;

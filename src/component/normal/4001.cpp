@@ -30,16 +30,16 @@ void nts::Component4001::simulate(std::size_t tick)
     if (m_tick >= tick)
         return;
     m_tick += 1;
-    simulatePin(m_pinMap[1].m_component, m_pinMap[1].m_state, m_pinMap[1].m_linkedPin, tick);
-    simulatePin(m_pinMap[2].m_component, m_pinMap[2].m_state, m_pinMap[2].m_linkedPin, tick);
+    simulatePin(m_pinMap[1], tick);
+    simulatePin(m_pinMap[2], tick);
     m_pinMap[3].m_state = !(m_pinMap[1].m_state || m_pinMap[2].m_state);
-    simulatePin(m_pinMap[5].m_component, m_pinMap[5].m_state, m_pinMap[5].m_linkedPin, tick);
-    simulatePin(m_pinMap[6].m_component, m_pinMap[6].m_state, m_pinMap[6].m_linkedPin, tick);
+    simulatePin(m_pinMap[5], tick);
+    simulatePin(m_pinMap[6], tick);
     m_pinMap[4].m_state = !(m_pinMap[5].m_state || m_pinMap[6].m_state);
-    simulatePin(m_pinMap[8].m_component, m_pinMap[8].m_state, m_pinMap[8].m_linkedPin, tick);
-    simulatePin(m_pinMap[9].m_component, m_pinMap[9].m_state, m_pinMap[9].m_linkedPin, tick);
+    simulatePin(m_pinMap[8], tick);
+    simulatePin(m_pinMap[9], tick);
     m_pinMap[10].m_state = !(m_pinMap[8].m_state || m_pinMap[9].m_state);
-    simulatePin(m_pinMap[12].m_component, m_pinMap[12].m_state, m_pinMap[12].m_linkedPin, tick);
-    simulatePin(m_pinMap[13].m_component, m_pinMap[13].m_state, m_pinMap[13].m_linkedPin, tick);
+    simulatePin(m_pinMap[12], tick);
+    simulatePin(m_pinMap[13], tick);
     m_pinMap[11].m_state = !(m_pinMap[12].m_state || m_pinMap[13].m_state);
 }

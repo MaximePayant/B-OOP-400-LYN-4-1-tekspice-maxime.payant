@@ -61,14 +61,11 @@ void nts::Component::dump() const
     speach::disp("");
 }
 
-void nts::Component::simulatePin(std::optional<std::reference_wrapper<nts::IComponent>>& cpt,
-                                 nts::Tristate& state,
-                                 std::size_t linkedPin,
-                                 std::size_t tick)
+void nts::Component::simulatePin(CptInfo cpt, std::size_t tick)
 {
-    if (cpt.has_value()) {
-        cpt.value().get().simulate(tick);
-        state = cpt.value().get().compute(linkedPin);
+    if (cpt.m_component.has_value()) {
+        cpt.m_component.value().get().simulate(tick);
+        cpt.m_state = cpt.m_component.value().get().compute(cpt.m_linkedPin);
     }
 }
 
