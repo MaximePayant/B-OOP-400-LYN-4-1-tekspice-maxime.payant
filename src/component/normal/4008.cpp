@@ -32,4 +32,25 @@ void nts::Component4008::simulate(std::size_t tick)
     if (m_tick >= tick)
         return;
     m_tick += 1;
+
+    simulatePin(m_pinMap[1], tick);
+    simulatePin(m_pinMap[2], tick);
+    simulatePin(m_pinMap[3], tick);
+    simulatePin(m_pinMap[4], tick);
+    simulatePin(m_pinMap[5], tick);
+    simulatePin(m_pinMap[6], tick);
+    simulatePin(m_pinMap[7], tick);
+    simulatePin(m_pinMap[9], tick);
+    simulatePin(m_pinMap[14], tick);
+    simulatePin(m_pinMap[15], tick);
+
+    nts::Tristate c2 = ((m_pinMap[7].m_state ^ m_pinMap[6].m_state)  && m_pinMap[9].m_state) || (m_pinMap[7].m_state && m_pinMap[6].m_state);
+    nts::Tristate c3 = ((m_pinMap[5].m_state ^ m_pinMap[4].m_state)  && c2)                  || (m_pinMap[5].m_state && m_pinMap[4].m_state);
+    nts::Tristate c4 = ((m_pinMap[3].m_state ^ m_pinMap[2].m_state)  && c3)                  || (m_pinMap[3].m_state && m_pinMap[2].m_state);
+    m_pinMap[14].m_state = ((m_pinMap[1].m_state ^ m_pinMap[15].m_state) && c4)              || (m_pinMap[1].m_state && m_pinMap[15].m_state);
+
+    m_pinMap[10].m_state = (m_pinMap[7].m_state ^ m_pinMap[6].m_state)  ^ m_pinMap[9].m_state;
+    m_pinMap[11].m_state = (m_pinMap[5].m_state ^ m_pinMap[4].m_state)  ^ c2;
+    m_pinMap[12].m_state = (m_pinMap[3].m_state ^ m_pinMap[2].m_state)  ^ c3;
+    m_pinMap[13].m_state = (m_pinMap[1].m_state ^ m_pinMap[15].m_state) ^ c4;
 }
