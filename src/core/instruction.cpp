@@ -59,7 +59,7 @@ void nts::Core::setInput(std::string var, std::string value)
         dynamic_cast<nts::Clock*>(it->second.get())->m_waitingState = state;
     }
     else
-        throw nts::Error("ERROR: Component <" + var + "> is not an input!");
+        throw nts::Error("ERROR: Component <" + var + "> is not an input or a clock!");
 }
 
 void nts::Core::simulate()

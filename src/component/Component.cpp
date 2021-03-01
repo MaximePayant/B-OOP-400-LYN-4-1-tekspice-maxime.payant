@@ -22,8 +22,6 @@ nts::Tristate nts::Component::compute(std::size_t pin)
 
     if (it == m_pinMap.end())
         throw nts::Error("ERROR: Pin [" + std::to_string(pin) +"] not found!");
-    if (!it->second.m_component.has_value())
-        throw nts::Error("ERROR: Pin [" + std::to_string(pin) +"] doesn't have a value!");
     return (it->second.m_state);
 }
 
