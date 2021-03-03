@@ -68,6 +68,8 @@ void nts::Core::simulate()
     for (auto& [_, cpt] : nts::parser)
         if (cpt.get()->getType() == "output")
             cpt.get()->simulate(tick);
+    for (auto& [_, cpt] : nts::parser)
+        cpt.get()->simulate(tick);
 }
 
 void nts::Core::loop()

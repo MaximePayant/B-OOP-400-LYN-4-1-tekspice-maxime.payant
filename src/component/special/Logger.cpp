@@ -15,5 +15,7 @@ nts::Logger::Logger(const std::string& name, nts::Tristate state) :
 
 void nts::Logger::simulate(std::size_t tick)
 {
-    (void)tick;
+    if (m_tick >= tick)
+        return;
+    m_tick += 1;
 }

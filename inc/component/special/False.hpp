@@ -17,9 +17,15 @@ namespace nts
         public Component
     {
 
+        private:
+            bool m_needChange;
+            nts::Tristate m_waitingState;
+
         public:
             False(const std::string& name, nts::Tristate state);
             ~False() = default;
+
+            void simulate(std::size_t tick) override;
 
     };
 
