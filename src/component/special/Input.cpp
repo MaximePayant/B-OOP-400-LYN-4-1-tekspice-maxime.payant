@@ -12,3 +12,13 @@ nts::Input::Input(const std::string& name, nts::Tristate state) :
 {
     m_pinMap[1] = {CptInfo::OUTPUT, state, 0, std::nullopt};
 }
+
+void nts::Input::simulate(std::size_t tick)
+{
+    (void)tick;
+    if (m_needChange) {
+        m_pinMap[1].m_state = m_waitingState;
+        m_needChange = false;
+    } else
+        m_pinMap[1].m_state = !m_pinMap[1].m_state;
+}

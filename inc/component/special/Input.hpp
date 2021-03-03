@@ -25,6 +25,8 @@ namespace nts
             Input(const std::string& name, nts::Tristate state);
             ~Input() = default;
 
+            void simulate(std::size_t tick) override;
+
         friend Core;
 
     }; // class Input
