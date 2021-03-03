@@ -41,7 +41,7 @@ void nts::Parser::load(const std::string& filename)
 {
     std::ifstream file(filename);
     std::string buffer;
-    ParserState pState;
+    ParserState pState = NONE;
 
     for (std::size_t line = 1; std::getline(file, buffer); line += 1) {
         format(buffer);

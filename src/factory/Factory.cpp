@@ -44,5 +44,5 @@ std::unique_ptr<nts::IComponent> nts::Factory::createComponent(const std::string
 {
     if (m_createFunc.find(type) != m_createFunc.end())
         return (m_createFunc[type](name, state));
-    throw nts::Error("ERROR: Component not found!");
+    throw nts::Error("ERROR: Component type <" + type + "> not found!");
 }
