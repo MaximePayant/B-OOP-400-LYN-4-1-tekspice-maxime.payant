@@ -44,16 +44,23 @@ void nts::Parser::createComponent(const std::string& firstArg, const std::string
     m_componentMap[name] = nts::Factory::createComponent(firstArg, name, state);
 }
 
+static std::size_t getPin(std::string str, int line)
+{
+    if (str.empty() || str.find_first_not_of("01U") != std::string::npos)
+        throw nts::Error("ERROR: Line " + std::to_string(line) + " you must give a valid value as argument. Must be 0, 1 or U.");
+    return (std::stoul(str));
+}
+
 void nts::Parser::linkComponent(const std::string& firstArg, const std::string& secondArg, int line)
 {
     if (std::count(firstArg.begin(), firstArg.end(), ':') != 1
-    && std::count(secondArg.begin(), secondArg.end(), ':') != 1)
+    || std::count(secondArg.begin(), secondArg.end(), ':') != 1)
         throw nts::Error("ERROR: Wrong format at line " + std::to_string(line) + " <" + firstArg + " " + secondArg + ">");
 
     std::string firstArgName = firstArg.substr(0, firstArg.find_first_of(':'));
-    std::size_t firstArgPin = std::stoul(firstArg.substr(firstArg.find_first_of(':') + 1));
+    std::size_t firstArgPin = getPin(firstArg.substr(firstArg.find_first_of(':') + 1), line);
     std::string secondArgName = secondArg.substr(0, secondArg.find_first_of(':'));
-    std::size_t secondArgPin = std::stoul(secondArg.substr(secondArg.find_first_of(':') + 1));
+    std::size_t secondArgPin = getPin(secondArg.substr(secondArg.find_first_of(':') + 1), line);
 
     if (m_componentMap.find(firstArgName) == m_componentMap.end())
         throw nts::Error("ERROR: Wrong argument <" + firstArgName + ">. Component doesn't exist.");
