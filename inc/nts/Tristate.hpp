@@ -27,9 +27,9 @@ namespace nts
 
 inline nts::Tristate operator^(const nts::Tristate& cmp1, const nts::Tristate& cmp2)
 {
-    if ((cmp1 == true && cmp2 == false) || (cmp1 == false && cmp2 == true))
+    if ((cmp1 == true && cmp2 != true) || (cmp1 != true && cmp2 == true))
         return (nts::TRUE);
-    if (cmp1 == nts::UNDEFINED && cmp2 == nts::UNDEFINED)
+    if (cmp1 == nts::UNDEFINED || cmp2 == nts::UNDEFINED)
         return (nts::UNDEFINED);
     return (nts::FALSE);
 }
@@ -40,7 +40,7 @@ inline nts::Tristate operator&&(const nts::Tristate& left, const nts::Tristate& 
         && right == nts::TRUE)
         return (nts::TRUE);
     if (left == nts::UNDEFINED
-        && right == nts::UNDEFINED)
+        || right == nts::UNDEFINED)
         return (nts::UNDEFINED);
     return (nts::FALSE);
 }
@@ -50,10 +50,10 @@ inline nts::Tristate operator||(const nts::Tristate& left, const nts::Tristate& 
     if (left == nts::TRUE
     || right == nts::TRUE)
         return (nts::TRUE);
-    if (left == nts::FALSE
-    || right == nts::FALSE)
-        return (nts::FALSE);
-    return (nts::UNDEFINED);
+    if (left == nts::UNDEFINED
+    || right == nts::UNDEFINED)
+        return (nts::UNDEFINED);
+    return (nts::FALSE);
 }
 
 inline nts::Tristate operator!(const nts::Tristate& state)
