@@ -46,8 +46,8 @@ void nts::Parser::createComponent(const std::string& firstArg, const std::string
 
 static std::size_t getPin(std::string str, int line)
 {
-    if (str.empty() || str.find_first_not_of("01U") != std::string::npos)
-        throw nts::Error("ERROR: Line " + std::to_string(line) + " you must give a valid value as argument. Must be 0, 1 or U.");
+    if (str.empty() || str.find_first_not_of("0123456789") != std::string::npos)
+        throw nts::Error("ERROR: Line " + std::to_string(line) + " you must give a valid pin as argument.");
     return (std::stoul(str));
 }
 
