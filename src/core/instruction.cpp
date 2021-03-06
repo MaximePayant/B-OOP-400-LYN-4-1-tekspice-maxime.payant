@@ -19,8 +19,6 @@
 static bool isInput(const std::string& str)
 {
     if (str == "input"
-    || str == "true"
-    || str == "false"
     || str == "clock")
         return (true);
     return (false);
