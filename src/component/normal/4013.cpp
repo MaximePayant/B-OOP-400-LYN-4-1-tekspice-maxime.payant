@@ -34,9 +34,11 @@ void nts::Component4013::simulate(std::size_t tick)
     nts::Tristate tmp11;
     nts::Tristate save_output;
 
-    if (m_tick >= tick)
-        return;
-    m_tick += 1;
+    if (tick != 0) {
+        if (m_tick >= tick)
+            return;
+        m_tick += 1;
+    }
     simulatePin(m_pinMap[3], tick);
     simulatePin(m_pinMap[4], tick);
     simulatePin(m_pinMap[5], tick);

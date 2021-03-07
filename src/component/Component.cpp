@@ -69,7 +69,9 @@ void nts::Component::simulatePin(CptInfo& cpt, std::size_t tick)
 
 void nts::Component::simulate(std::size_t tick)
 {
-    if (m_tick >= tick)
-        return;
-    m_tick += 1;
+    if (tick != 0) {
+        if (m_tick >= tick)
+            return;
+        m_tick += 1;
+    }
 }

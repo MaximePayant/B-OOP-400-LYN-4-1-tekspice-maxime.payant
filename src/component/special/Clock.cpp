@@ -17,9 +17,11 @@ nts::Clock::Clock(const std::string& name, nts::Tristate state) :
 
 void nts::Clock::simulate(std::size_t tick)
 {
-    if (m_tick >= tick)
-        return;
-    m_tick += 1;
+    if (tick != 0) {
+        if (m_tick >= tick)
+            return;
+        m_tick += 1;
+    }
     if (m_needChange) {
         m_pinMap[1].m_state = m_waitingState;
         m_needChange = false;

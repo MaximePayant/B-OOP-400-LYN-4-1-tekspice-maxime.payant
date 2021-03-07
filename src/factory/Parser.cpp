@@ -37,6 +37,22 @@ static void format(std::string& str)
         str = "";
 }
 
+static bool check_only_true_false()
+{
+    bool hasTrueFalse = false;
+
+    for (auto& [_, cpt] : nts::parser) {
+        auto type = cpt.get()->getType();
+        if (type == "true"
+        || type == "false")
+            hasTrueFalse = true;
+        else if (type == "input"
+        || type == "clock")
+            return (false);
+    }
+    return (hasTrueFalse);
+}
+
 void nts::Parser::load(const std::string& filename)
 {
     std::ifstream file(filename);
@@ -50,4 +66,11 @@ void nts::Parser::load(const std::string& filename)
     }
     if (m_componentMap.empty())
         throw nts::Error("ERROR: There is no component in your circuit !");
+    if (check_only_true_false()) {
+        for (auto& [_, cpt] : nts::parser)
+            if (cpt.get()->getType() == "output")
+                cpt.get()->simulate(0);
+        for (auto& [_, cpt] : nts::parser)
+            cpt.get()->simulate(0);
+    }
 }

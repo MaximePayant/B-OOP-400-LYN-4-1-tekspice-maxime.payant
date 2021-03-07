@@ -15,7 +15,9 @@ nts::Component4040::Component4040(const std::string& name, nts::Tristate state) 
 
 void nts::Component4040::simulate(std::size_t tick)
 {
-    if (m_tick >= tick)
-        return;
-    m_tick += 1;
+    if (tick != 0) {
+        if (m_tick >= tick)
+            return;
+        m_tick += 1;
+    }
 }

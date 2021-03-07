@@ -29,9 +29,11 @@ nts::Component4069::Component4069(const std::string& name, nts::Tristate state) 
 
 void nts::Component4069::simulate(std::size_t tick)
 {
-    if (m_tick >= tick)
-        return;
-    m_tick += 1;
+    if (tick != 0) {
+        if (m_tick >= tick)
+            return;
+        m_tick += 1;
+    }
     simulatePin(m_pinMap[1], tick);
     m_pinMap[2].m_state = !m_pinMap[1].m_state;
     simulatePin(m_pinMap[3], tick);
