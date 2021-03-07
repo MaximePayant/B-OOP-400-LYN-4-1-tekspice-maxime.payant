@@ -21,11 +21,11 @@ nts::Component4017::Component4017(const std::string& name, nts::Tristate state) 
     m_pinMap[9]  = {CptInfo::OUTPUT, nts::UNDEFINED, 0, std::nullopt};
     m_pinMap[10]  = {CptInfo::OUTPUT, nts::UNDEFINED, 0, std::nullopt};
     m_pinMap[11]  = {CptInfo::OUTPUT, nts::UNDEFINED, 0, std::nullopt};
+    m_pinMap[12]  = {CptInfo::OUTPUT, nts::UNDEFINED, 0, std::nullopt};
 
     m_pinMap[13]  = {CptInfo::INPUT, nts::UNDEFINED, 0, std::nullopt};
     m_pinMap[14]  = {CptInfo::INPUT, nts::UNDEFINED, 0, std::nullopt};
     m_pinMap[15]  = {CptInfo::INPUT, nts::UNDEFINED, 0, std::nullopt};
-    //m_pinMap[12]  = {CptInfo::OUTPUT, nts::UNDEFINED, 0, std::nullopt};
 }
 
 void nts::Component4017::simulate(std::size_t tick)

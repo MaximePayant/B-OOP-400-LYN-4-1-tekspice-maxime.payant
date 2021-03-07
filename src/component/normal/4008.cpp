@@ -19,12 +19,13 @@ nts::Component4008::Component4008(const std::string& name, nts::Tristate state) 
     m_pinMap[6]  = {CptInfo::INPUT, nts::UNDEFINED, 0, std::nullopt};
     m_pinMap[7]  = {CptInfo::INPUT, nts::UNDEFINED, 0, std::nullopt};
     m_pinMap[9]  = {CptInfo::INPUT, nts::UNDEFINED, 0, std::nullopt};
-    m_pinMap[14]  = {CptInfo::INPUT, nts::UNDEFINED, 0, std::nullopt};
     m_pinMap[15]  = {CptInfo::INPUT, nts::UNDEFINED, 0, std::nullopt};
+
     m_pinMap[10]  = {CptInfo::OUTPUT, nts::UNDEFINED, 0, std::nullopt};
     m_pinMap[11]  = {CptInfo::OUTPUT, nts::UNDEFINED, 0, std::nullopt};
     m_pinMap[12]  = {CptInfo::OUTPUT, nts::UNDEFINED, 0, std::nullopt};
     m_pinMap[13]  = {CptInfo::OUTPUT, nts::UNDEFINED, 0, std::nullopt};
+    m_pinMap[14]  = {CptInfo::OUTPUT, nts::UNDEFINED, 0, std::nullopt};
 }
 
 void nts::Component4008::simulate(std::size_t tick)
